@@ -1,0 +1,5 @@
+tasks.db
+__pycache__/
+*.pyc
+output.txt
+W3 - Connecting your CRUD to the database.pdf
