@@ -1,18 +1,16 @@
-from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Depends
 from sqlmodel import Session, select
 
 from database import engine, init_db
 from models import Task, TaskCreate, TaskRead, TaskUpdate
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
+app = FastAPI(title="Task CRUD API")
+
+
+@app.on_event("startup")
+def on_startup():
     init_db()
-    yield
-
-
-app = FastAPI(title="Task CRUD API", lifespan=lifespan)
 
 
 def get_session():
